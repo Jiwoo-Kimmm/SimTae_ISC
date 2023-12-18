@@ -4,7 +4,7 @@ let postInput;
 let postBtn;
 let ProjectURL = "https://mjsbmdhaqjfozvjtuzhj.supabase.co"
 let API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qc2JtZGhhcWpmb3p2anR1emhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI3OTY3OTAsImV4cCI6MjAxODM3Mjc5MH0.JHDHXvFnkHHo_F48bFSPNmdf8M_nCDh__UOLryjJgEY"
-let numberDB = 15;
+let numberDB = 30;
 let diary;
 let supabase;
 
@@ -35,7 +35,7 @@ const endImageNumber0 = 49; // 끝 숫자
 //(메인)
 let images2 = []; // 이미지를 저장할 배열을 선언합니다.
 const startImageNumber2 = 200; // 이미지의 시작 숫자입니다.
-const endImageNumber2 = 222; // 끝 숫자
+const endImageNumber2 = 228; // 끝 숫자
 
 // ml5 (미로)
 console.log('ml5 version:', ml5.version);
@@ -807,6 +807,7 @@ function draw(){
         pop(); // 스택에서 이전의 변환 상태를 불러옴
 
         // image(images2[15], 0, 0, width, height); // 미로 원래 그림
+        image(images2[27],0,0,width, height);
         image(images0[30], 0, 0, width, height);
 
       // Rectangle();
@@ -1211,7 +1212,7 @@ function draw(){
     if (fadeValue === 0) {
     }
   } 
-  if(testing == 18 && inputDigits.length === 4 && inputDigits !== correctCode) {
+  if(testing == 18 && inputDigits.length >= 4 && inputDigits !== correctCode) {
     image(images0[49], 0, 0, width, height);
   }
   else if(testing == 19) {
@@ -1428,26 +1429,32 @@ function draw(){
       //혈액형별 다른 테스트 결과
       if (bloodType == "A형"){
         image(images2[18], 0, -9, width, height);
+        image(images2[23],0,0,width, height)
+
       }
 
       if (bloodType == "B형"){
         image(images2[20], 0, -9, width, height);
+        image(images2[25],0,0,width, height)
       }
 
       if (bloodType == "O형"){
         image(images2[21], 0, -9, width, height);
+        image(images2[26],0,0,width, height)
       }
 
       if (bloodType == "AB형"){
         image(images2[19], 0, -9, width, height);
+        image(images2[24],0,0,width, height)
       }
 
       
       if (millis() - previousTime10 > 150) {        
         image(images[64],0,0,width,height); //QR안내배경
+        nextPageEffect();
       }
 
-      nextPageEffect();
+      
     }
 
     if(scene == 7){
@@ -1455,6 +1462,7 @@ function draw(){
       image(images[54],0,0,width,height); //테두리, 오프닝 엔딩에는 수동 입력 (겹침 문제 해소)
       image(images[34], 0, 0, width, height);
       text("테스트 결과가 좋네요.", 150,750);
+      qrcode.hide();
       nextPageEffect()
     }
 
@@ -1484,10 +1492,20 @@ function draw(){
     // textAlign(CENTER, CENTER);
     // textSize(100);
     // text("방명록 만드는 중",width/2, height/2);
+    
+
+    // if (mouseX > 1055 && mouseX < 1105 && mouseY > 765 && mouseY < 815){
+    //   image(images[49],0,0,width,height);
+    // }
+    
+    image(images[54],0,0,width,height); //테두리, 오프닝 엔딩에는 수동 입력 (겹침 문제 해소)
 
     if(diary && fontLetter) {
+      
       image(diary, 0, 0);
       textFont(fontLetter);
+      //image(images[48],0,0,width,height);
+      nextPageEffect();
     }
     if (posts.length >0) {
       for (let i = posts.length-1 ; i > posts.length-numberDB-1 ; i--) {
@@ -1544,7 +1562,7 @@ function draw(){
 
   if(ending==6){
     movingTitle();
-    image(images[63], 0, 50, width, height); //게임 종료 화면
+    image(images2[28], 0, 0, width, height); //게임 종료 화면
     image(images[54],0,0,width,height); //테두리, 오프닝 엔딩에는 수동 입력 (겹침 문제 해소)
   }
 
@@ -1721,9 +1739,9 @@ async function mousePressed(){
     }
   }
 
-  if (cut >= 5){
-    if (mouseX > 323 && mouseX < 499 && mouseY > 85 && mouseY < 124){
-      cut += 1;
+  if (cut == 5){
+    if (mouseX > 323 && mouseX < 499 && mouseY > 85 && mouseY < 124){ //쪽지클릭
+      cut = 6;
     }
   }
 
@@ -1899,6 +1917,13 @@ async function mousePressed(){
     } 
   }
 
+  if (ending == 3 && scene ==9){
+    if (mouseX > 1055 && mouseX < 1105 && mouseY > 765 && mouseY < 815){
+      ending = 6
+        scene = 10;
+    }
+  }
+
   if (ending == 4 && ending !=5){
     if (mouseX > 1055 && mouseX < 1105 && mouseY > 765 && mouseY < 815){
       ending = 5
@@ -1992,6 +2017,12 @@ function mouseIsOn() {
       } else if (mouseX > 650 && mouseX < 900 && mouseY > 525 && mouseY < 575) { //2nd button
         image(images[62],0,0,width,height);
       } 
+  }
+
+  if (ending == 3 && scene ==9){
+    if (mouseX > 1055 && mouseX < 1105 && mouseY > 765 && mouseY < 815){
+      image(images[49],0,0,width,height);
+    }
   }
 
   if (testing == 1) {
@@ -2229,7 +2260,7 @@ function jjinReStart() {
 
   ProjectURL = "https://mjsbmdhaqjfozvjtuzhj.supabase.co"
   API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qc2JtZGhhcWpmb3p2anR1emhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI3OTY3OTAsImV4cCI6MjAxODM3Mjc5MH0.JHDHXvFnkHHo_F48bFSPNmdf8M_nCDh__UOLryjJgEY"
-  numberDB = 15;
+  numberDB = 30;
 
 textSize(40);
 
