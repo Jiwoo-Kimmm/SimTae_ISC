@@ -1273,7 +1273,7 @@ function draw(){
           transparency += fadeInSpeed + 5;
         }
         image(images[54],0,0,width,height); //테두리, 오프닝 엔딩에는 수동 입력 (겹침 문제 해소)
-        image(images[34], 0, 0, width, height); // 말풍선
+        image(images[23], 0, 0, width, height); // 말풍선
         text("설마.. 정보문화학전공필수과목<정보문화기술입문>을담당하시는", 150,740);
         text("오 종 환 교 수 님!?!", 150,780);
 
@@ -1282,7 +1282,7 @@ function draw(){
         noTint();
 
         image(images[54],0,0,width,height); //테두리, 오프닝 엔딩에는 수동 입력 (겹침 문제 해소)
-        image(images[34], 0, 0, width, height); //말풍선
+        image(images[23], 0, 0, width, height); //말풍선
         text("설마.. 정보문화학전공필수과목<정보문화기술입문>을담당하시는", 150,740);
         text("오 종 환 교 수 님!?!", 150,780);
         nextPageEffect()
@@ -1554,7 +1554,7 @@ function draw(){
     textSize(40);
     image(images[15],0,0,width,height);
     image(images[54],0,0,width,height); //테두리, 오프닝 엔딩에는 수동 입력 (겹침 문제 해소)
-    image(images[23], 0, 0, width, height); //지문 말풍선
+    image(images[34], 0, 0, width, height); //지문 말풍선
     text("그럼 방명록만이라도 남기고 가요. ㅡㅡ^", 150,750);
     image(images[60], 0, 0, width, height); //버튼 두 개 등장
 
